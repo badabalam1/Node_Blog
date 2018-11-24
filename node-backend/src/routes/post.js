@@ -3,15 +3,29 @@ const List = require('../databases/List')
 const authentication = require('../tools/authentication')
 const checkProperty = require('../tools/validator')
 
+exports.post_select = async (req, res) => {
+    try {
+        if (req.params.postId.length !== 24) throw new Error('글이 존재하지 않습니다.')
+        const list = (await List.findById(req.params.postId))
+        if (!list) throw new Error('글이 존재하지 않습니다.')
+        return res.send({ message: 'SUCCESS', list })
+    } catch ({ message }) {
+        return res.send({ message })
+    }
+}
+
 exports.post_write = async (req, res) => {
     try {
+        console.log(req.headers)
         if (authentication.IsLogin(req, res)) return
+        console.log(req.body)
         const user = (await User.findById(req.user.id))
         if (await user.admin !== true) {
             throw new Error('권한이 없습니다.')
         }
         const data = { id: user.id, title: req.body.title, content: req.body.content }
         const target = (await List.create(data))
+        console.log('1')
         return res.send({ message: 'SUCCESS', target })
     } catch ({ message }) {
         return res.send({ message })
@@ -55,7 +69,7 @@ exports.comment_write = async (req, res) => {
         const user = (await User.findById(req.user.id))
         const list = (await List.findById(req.params.postId))
         if (!list) throw new Error('글이 존재하지 않습니다.')
-
+        console.log(req.body)
         const data = checkProperty.checkProperty(req.body, 'comment', true)
         data.data.id = user.id
         list.comment.push(data.data)
