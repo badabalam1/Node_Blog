@@ -4,6 +4,7 @@ const constants = require('../config/config')
 
 exports.login = async (req, res) => {
     try {
+        console.log(req.body)
         const member = (await User.login(req.body.id, req.body.password))[0]
         if (!member) {
             throw new Error('아이디 혹은 비밀번호가 틀렸습니다.')
