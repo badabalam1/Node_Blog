@@ -1,0 +1,47 @@
+@import '../../../styles/utils.scss';
+
+.post-comment {
+    margin-top: 1rem;
+    .comment {
+        padding-top: 5px;
+        padding-bottom: 0.01rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background: $oc-white;
+        transform: translateY(-3rem);
+        margin: 0 auto;
+        align-items: center;
+        width: 1024px;
+        @include media("<large") { width: 768px; }
+        @include media("<medium") { width: calc(100% - 2rem)}
+        .date {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: $oc-gray-9;
+        }
+        input {
+            height: 100%;
+        }
+        .delete, .update {
+            font-size: 18px;
+            font-weight: 1000;
+            border: none;
+            background: none;
+            float: right;
+            color: $oc-red-6;
+            outline: none;
+        }
+        .update {
+            color: $oc-blue-6;
+        }
+        b {
+            color: $oc-red-6;
+        }
+        p {
+            margin-top: 3px;
+        }
+    }
+    .comment + .comment {
+        border-top: 1px solid $oc-gray-3;
+    }
+}

@@ -1,0 +1,29 @@
+@import '../../../styles/utils.scss';
+
+.post-body {
+    .paper {
+        padding: 2rem;
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+        background: $oc-white;
+        @include material-shadow(4, 0.5);
+        transform: translateY(-3rem);
+        margin: 0 auto;
+        min-height: 20rem;
+        .hert {
+            margin-bottom: -35px;
+            padding-top: 2rem;
+            button {
+                border: none;
+                background: none;
+                color: $oc-red-6;
+                font-size: 1.5rem;
+                font-weight: 500;
+                outline: 0;
+            }
+        }
+        width: 1024px;
+        @include media("<large") { width: 768px; }
+        @include media("<medium") { width: calc(100% - 2rem)}
+    }
+}

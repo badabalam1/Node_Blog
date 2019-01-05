@@ -1,0 +1,26 @@
+@import '../../../styles/utils.scss';
+
+.editor-header {
+    background: $oc-violet-5;
+    height: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    .submit {
+        margin-left: auto;
+    }
+
+    button {
+        font-size: 1.2rem;
+        font-weight: 1000;
+        background: none;
+        border: 0.25rem solid $oc-white;
+        outline: 0;
+        color: white;
+        &:hover {
+            color: $oc-violet-5;
+            background: white;
+        }
+    }
+}
