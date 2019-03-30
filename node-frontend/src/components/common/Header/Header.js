@@ -19,7 +19,9 @@ const Header = () => (
                 <Link to='/'>ReactBlog</Link>
             </div>
             <div className={cx('right')}>
-                {localStorage.getItem('Token') ? <div onClick={handleClick}>로그아웃</div> : <Link to='/Login'>로그인</Link>}
+                <Link className={cx('list')} to='/'>글목록</Link>
+                {localStorage.getItem('Token') ? <div className={cx('logout')} onClick={handleClick}>로그아웃</div> : <Link className={cx('list')} to='/Login'>로그인</Link>}
+                {localStorage.getItem('Token') ? null : <Link to='/Register'>회원가입</Link>}
             </div>
         </div>
     </header>

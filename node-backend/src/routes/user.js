@@ -12,7 +12,7 @@ exports.register = async (req, res) => {
         }
         data.data.admin = false;
         const user = await User.create(data.data)
-        return res.send({ message: 'SUCCESS', user })
+        return res.send({ message: 'Success' })
     } catch ({ message }) {
         return res.send({ message })
     }

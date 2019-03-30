@@ -1,0 +1,41 @@
+@import '../../../styles/utils.scss';
+
+.hert {
+    position: fixed;
+    bottom: 1rem;
+    cursor: default;
+    button {
+        cursor: pointer;
+    }
+    button {
+        position: absolute;
+        border: none;
+        background: none;
+        color: $oc-red-6;
+        font-size: 1.5rem;
+        font-weight: 500;
+        outline: 0;
+        z-index: 1px;
+    }
+    .red,{
+        margin-left: -20px;
+        margin-top: 1.7rem;
+        background-image:url('https://www.instagram.com/static/bundles/metro/sprite_glyphs_50d91e465dcb.png/50d91e465dcb.png'); 
+        background-position: 189px 557px;
+        width: 25px;
+        height:26px;
+    }
+    .gray{
+        margin-left: -20px;
+        margin-top: 1.7rem;
+        background-image:url('https://www.instagram.com/static/bundles/metro/sprite_glyphs_50d91e465dcb.png/50d91e465dcb.png'); 
+        background-position: 163px 557px;
+        width: 25px;
+        height:26px;
+    }
+    .goodsCount {
+        font-size: 1.5rem;
+        margin-bottom: -9px;
+        padding-left: 1.1rem;
+    }
+}

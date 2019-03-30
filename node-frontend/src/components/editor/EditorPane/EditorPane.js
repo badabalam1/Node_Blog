@@ -19,6 +19,11 @@ const cx = classnames.bind(styles)
 
 class EditorPane extends Component {
 
+    state = {
+        title: '',
+        content: ''
+    }
+
     editor = null //에디터 ref
     codeMirror = null //codeMirror 인스턴스
     cursor = null
@@ -40,11 +45,13 @@ class EditorPane extends Component {
     handleChange = (e) => {
         const { onChangeInput } = this.props
         const { value, name } = e.target
+        this.setState({ title: value })
         onChangeInput({ name, value })
     }
 
     handleChangeMarkdown = (doc) => {
         const { onChangeInput } = this.props
+
         this.cursor = doc.getCursor() // 텍스트 cursor 위치 저장
         onChangeInput({
             name: 'markdown',

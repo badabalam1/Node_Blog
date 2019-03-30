@@ -3,7 +3,6 @@
 .post-comment {
     margin-top: 1rem;
     .comment {
-        padding-top: 5px;
         padding-bottom: 0.01rem;
         padding-left: 1rem;
         padding-right: 1rem;
@@ -21,7 +20,25 @@
         }
         input {
             height: 100%;
+            font-weight: 300;
+            font-size: 1rem;
+            margin-bottom: 0.9rem;
         }
+        .updateInput {
+            margin-bottom: 0.9rem;
+        }
+        .commentInput {
+            margin-bottom: 0px;
+            font-size: 0.8rem;
+            padding-top: 5px;
+            padding-bottom: 3px;
+            padding-left: 5px;
+        }
+        button {
+            padding-top: 2px;
+            padding-bottom: 3px;
+        }
+        
         .delete, .update {
             font-size: 18px;
             font-weight: 1000;

@@ -17,5 +17,14 @@ module.exports = {
         } else {
             return res.send({ message: 'ACCESS_DENIED' })
         }
+    },
+    Login: (req, res) => {
+        if (req.headers.authorization) {
+            jwt.verify(req.headers.authorization, constants.JWT_SALT, (err, decoded) => {
+                if (!err && decoded) {
+                    req.user = decoded
+                }
+            })
+        }
     }
 }

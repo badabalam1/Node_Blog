@@ -1,13 +1,20 @@
 const User = require('../databases/User')
 const List = require('../databases/List')
-const authentication = require('../tools/authentication')
-const checkProperty = require('../tools/validator')
+const { IsLogin, Login } = require('../tools/authentication')
+const { checkProperty } = require('../tools/validator')
 
 exports.post = async (req, res) => {
     try {
+        if (Login(req, res)) return
         const list = (await List.find({}, { comment: false }))
         if (!list) throw new Error('오류가 발생했습니다.')
-        return res.send({ message: 'SUCCESS', list })
+        if (req.user) {
+            const user = (await User.findById(req.user.id))
+            console.log(user)
+            return res.send({ message: 'SUCCESS', list, user })
+        } else {
+            return res.send({ message: 'SUCCESS', list, 'user': { admin: undefined } })
+        }
     } catch ({ message }) {
         return res.send({ message })
     }
@@ -15,10 +22,14 @@ exports.post = async (req, res) => {
 
 exports.select = async (req, res) => {
     try {
-        if (req.params.postId.length !== 24) throw new Error('글이 존재하지 않습니다.')
+        if (Login(req, res)) return
         const list = (await List.findById(req.params.postId).populate('id'))
         if (!list) throw new Error('글이 존재하지 않습니다.')
-        return res.send({ message: 'SUCCESS', list })
+        if (req.user) {
+            return res.send({ message: 'Success', list, user: true })
+        } else {
+            return res.send({ message: 'Success', list, admin: false })
+        }
     } catch ({ message }) {
         return res.send({ message })
     }
@@ -27,7 +38,7 @@ exports.select = async (req, res) => {
 exports.write = async (req, res) => {
     try {
         console.log(req.body)
-        if (authentication.IsLogin(req, res)) return
+        if (IsLogin(req, res)) return
         const user = (await User.findById(req.user.id))
         if (await user.admin !== true) {
             throw new Error('권한이 없습니다.')
@@ -40,16 +51,33 @@ exports.write = async (req, res) => {
     }
 }
 
+exports.get_user = async (req, res) => {
+    try {
+        if (Login(req, res)) return
+        if (req.user) {
+            const user = (await User.findById(req.user.id))
+            return res.send({ message: 'SUCCESS', user })
+        } else {
+            return res.send({ message: 'SUCCESS', 'user': { admin: undefined } })
+        }
+    } catch ({ message }) {
+        return res.send({ message })
+    }
+}
+
 exports.post_update = async (req, res) => {
     try {
-        if (authentication.IsLogin(req, res)) return
+        if (IsLogin(req, res)) return
         const user = (await User.findById(req.user.id))
+        const list = (await List.findById(req.params.postId))
         if (await user.admin !== true) {
             throw new Error('권한이 없습니다.')
         }
         const data = { title: req.body.title, content: req.body.content }
-        const target = (await List.update(data))
-        return res.send({ message: 'SUCCESS', target })
+        list.title = req.body.title
+        list.content = req.body.content
+        list.save()
+        return res.send({ message: 'Success' })
     } catch ({ message }) {
         return res.send({ message })
     }
@@ -57,17 +85,17 @@ exports.post_update = async (req, res) => {
 
 exports.post_delete = async (req, res) => {
     try {
-        if (authentication.IsLogin(req, res)) return
+        if (IsLogin(req, res)) return
         const user = (await User.findById(req.user.id))
-        if (req.params.postId.length !== 24) throw new Error('글이 존재하지 않습니다.')
-        const list = (await User.findById(req.params.postId))
+        const list = (await List.findById(req.params.postId))
+        console.log(list)
         if (await user.admin !== true) {
             throw new Error('권한이 없습니다.')
         }
         const target = list.remove();
-        return res.send({ message: 'SUCCESS', target })
+        return res.send({ result: true, message: '삭제되었습니다.' })
     } catch ({ message }) {
-        return res.send({ message })
+        return res.send({ result: false, message })
     }
 }
 

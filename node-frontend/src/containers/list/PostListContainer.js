@@ -16,16 +16,17 @@ class PostListContainer extends Component {
     }
 
     render() {
-        const { posts } = this.props
+        const { posts, user } = this.props
         return (
-            <PostList posts={posts} />
+            <PostList posts={posts} user={user} />
         );
     }
 }
 
 export default connect(
     (state) => ({
-        posts: state.list.get('posts')
+        posts: state.list.get('posts'),
+        user: state.list.get('user')
     }),
     (dispatch) => ({
         ListActions: bindActionCreators(listActions, dispatch)

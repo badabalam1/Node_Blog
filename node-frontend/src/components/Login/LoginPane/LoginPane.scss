@@ -1,0 +1,39 @@
+@import '../../../styles/utils.scss';
+
+.login-pane {
+    margin-top: 7rem;
+    text-align: center;
+    margin-right: 5rem;
+    margin-left: 5rem;
+    input {
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding-left: 1rem;
+        
+        width: 100%;
+        height: 3rem;
+    }
+    .password {
+        margin-top: 10px;
+    }
+
+    .button {
+        margin-top: 1rem;
+    }
+    h3 {
+        width: 5rem;
+        text-align: left;
+        margin-left: 2rem;
+        cursor: pointer;
+        user-select: none;
+    }
+    .idText {
+        text-align: left;
+        margin-bottom: 5px;
+    }
+    .passwordText {
+        text-align: left;
+        margin-top: 5px;
+        margin-bottom: -5px;
+    }
+}

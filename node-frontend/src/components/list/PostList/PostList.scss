@@ -1,6 +1,16 @@
 @import '../../../styles/utils.scss';
 
 .post-list {
+    button {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 20px;
+        border: none;
+        margin-top: -15px;
+        margin-bottom: 10px;
+        width: 100%;
+        cursor: pointer;
+    }
     .post-item {
         padding: 1.5rem;
         transition: all .15s ease-in;

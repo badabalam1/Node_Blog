@@ -11,6 +11,7 @@ export const getPostList = createAction(GET_POST_LIST, api.getList)
 
 const initialState = Map({
     posts: List(),
+    user: ''
 })
 
 export default handleActions({
@@ -18,8 +19,8 @@ export default handleActions({
         type: GET_POST_LIST,
         onSuccess: (state, action) => {
             console.log(action)
-            const { list: posts } = action.payload.data
-            return state.set('posts', fromJS(posts))
+            const { list: posts, user } = action.payload.data
+            return state.set('posts', fromJS(posts)).set('user', user)
         }
     })
 }, initialState)

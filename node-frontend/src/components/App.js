@@ -7,9 +7,11 @@ const App = () => {
     <div>
       <Switch>
         <Route exact path='/' component={ListPage} />
-        <Route path='/editor' component={EditorPage} />
+        <Route path='/editor/:id' component={EditorPage} />
+        <Route path='/editor/' component={EditorPage} />
         <Route path='/post/:id' component={PostPage} />
         <Route path='/Login' component={LoginPage} />
+        <Route path='/Register' component={LoginPage} />
       </Switch>
     </div>
   )

@@ -28,7 +28,6 @@ exports.write = async (req, res) => {
 exports.select = async (req, res) => {
     try {
         const comments = (await Comment.find({ post: req.params.postId }).sort({ createdAt: -1 }).populate('id'))
-        console.log(comments)
         return res.send({ message: 'SUCCESS', comments })
     } catch ({ message }) {
         return res.send({ message })

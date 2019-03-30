@@ -4,11 +4,13 @@ import EditorHeaderContainer from '../containers/editor/EditorHeaderContainer';
 import EditorPaneContainer from '../containers/editor/EditorPaneContainer';
 import PreviewPaneContainer from '../containers/editor/PreviewPaneContainer';
 
-const EditorPage = () => {
+const EditorPage = ({ match }) => {
+    const { id } = match.params;
     return (
         <EditorTemplate
-            header={<EditorHeaderContainer />}
-            editor={<EditorPaneContainer />}
+            id={id}
+            header={<EditorHeaderContainer id={id} />}
+            editor={<EditorPaneContainer id={id} />}
             preview={<PreviewPaneContainer />}
         />
     )

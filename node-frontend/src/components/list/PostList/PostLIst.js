@@ -16,17 +16,18 @@ const PostItem = ({ _id, id, title, createdAt, content }) => {
     )
 }
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts, user }) => {
     const postList = posts.map(
         (posts) => {
             const { _id, title, createdAt, content } = posts.toJS()
             return (
-                <PostItem _id={_id} title={title} createdAt={createdAt} content={content} />
+                <PostItem key={_id} _id={_id} title={title} createdAt={createdAt} content={content} />
             )
         }
     )
     return (
         <div className={cx('post-list')}>
+            {user.admin ? <Link to={`/editor`}><button>글쓰기</button></Link> : null}
             {postList}
         </div>
     )

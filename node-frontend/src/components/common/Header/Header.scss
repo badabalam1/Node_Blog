@@ -30,6 +30,12 @@
             font-size: 1.5rem;
             font-weight: 600;
             margin-left: auto;
+            .list {
+                margin-right: 10px;
+            }
+            .logout {
+                cursor: pointer;
+            }
         }
     }
 }

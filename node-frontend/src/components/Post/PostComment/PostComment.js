@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import styles from './PostComment.scss';
 import classnames from 'classnames/bind';
-import moment, { relativeTimeThreshold } from 'moment';
+import moment from 'moment';
 
 const cx = classnames.bind(styles)
 
@@ -47,14 +47,14 @@ class PostComment extends Component {
             (commentss) => {
                 const { _id, comment, id, createdAt } = commentss.toJS()
                 return (
-                    <CommentItem id={id.id} comment={comment} _id={_id} createdAt={createdAt} handleDelete={handleDelete} handleUpdate={handleUpdate} />
+                    <CommentItem key={_id} id={id.id} comment={comment} _id={_id} createdAt={createdAt} handleDelete={handleDelete} handleUpdate={handleUpdate} />
                 )
             }
         )
         return (
             <div className={cx('post-comment')}>
                 <div className={cx('comment')}>
-                    <input name='comment' placeholder='댓글을 입력하세요' value={this.state.text} onChange={handleChange} onKeyPress={handleKeyPress} />
+                    <input className={cx('commentInput')} name='comment' placeholder='댓글을 입력하세요' value={this.state.text} onChange={handleChange} onKeyPress={handleKeyPress} />
                     <button onClick={handleSubmit}>댓글 적기</button>
                 </div>
                 {commentList}
@@ -85,7 +85,6 @@ class CommentItem extends PostComment {
             boolean: !this.state.boolean,
             text: this.props.comment
         })
-        this.input.focus()
     }
 
 
@@ -110,13 +109,12 @@ class CommentItem extends PostComment {
                     </Fragment>
                 ) : (
                         <Fragment>
-                            <input name='update' ref={ref => { this.input = ref }} onChange={handleChange} value={this.state.text} />
                             <button className={cx('delete')} onClick={handleBoolean}>취소</button>
                             <button className={cx('update')} onClick={handleUpdate}>수정</button>
                             <p className={cx('date')}>{moment(createdAt).fromNow() === "a day ago" ? moment(createdAt).startOf('day').fromNow() : moment(createdAt).fromNow()}</p>
+                            <input name='updateInput' ref={ref => { this.input = ref }} onChange={handleChange} value={this.state.text} />
                         </Fragment>
                     )}
-
             </div>
         )
     }
